@@ -33,6 +33,10 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
+      - name: List UF2
+        run: |
+          ls build/
+
       - name: Upload uf2 file as artifact
         uses: actions/upload-artifact@v2
         with:
