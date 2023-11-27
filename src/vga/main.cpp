@@ -3,8 +3,11 @@
 #include "pico/multicore.h"
 #include "hardware/vreg.h"
 #include "hardware/pwm.h"
+#ifdef USE_MRMLTR_PS2_KBD
+#include "ps2kbd_mrmltr.h"
+#else
 #include "ps2kbd.h"
-
+#endif
 #include "vga.h"
 #include "ZxSpectrumPrepareRgbScanline.h"
 // #include "pzx_keyscan.h"
@@ -117,6 +120,14 @@ extern "C"  void __not_in_flash_func(process_kbd_report)(hid_keyboard_report_t c
     picoRootWin.repaint();
   }
 }
+
+#ifdef USE_MRMLTR_PS2_KBD
+static Ps2Kbd_Mrmltr ps2kbd(
+  pio1,
+  8,
+  process_kbd_report
+);
+#endif
 
 #ifdef USE_PS2_KBD
 static Ps2Kbd ps2kbd(
