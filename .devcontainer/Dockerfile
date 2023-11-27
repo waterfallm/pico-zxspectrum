@@ -25,18 +25,31 @@ RUN git clone https://github.com/fruit-bat/pico-emu-utils
 RUN git clone https://github.com/redcode/Z80.git
 RUN git clone https://github.com/redcode/Zeta.git
 
+
+
 # Install the Raspberry Pi Pico SDK repository
 RUN cd pico-sdk && git submodule update --init
 # Set the PICO_SDK_PATH environment variable
 ENV PICO_SDK_PATH=/pico-sdk
+
+
 
 # # Install the Raspberry Pi Pico SDK repository
 RUN cd ../pico-extras && git submodule update --init
 # # Set the PICO_SDK_PATH environment variable
 ENV PICO_EXTRAS_PATH=/pico-extras
 
+
+#The version of TinyUSB in the Pico SDK will need to be replaced with a version containing a HID report parser and USB hub support.
+RUN cd $PICO_SDK_PATH/lib/
+RUN rm -f -r tinyusb
+RUN git clone https://github.com/fruit-bat/tinyusb.git
+RUN cd tinyusb
+RUN git checkout hid_micro_parser
+
+
 # #back to the root dir
-# RUN CD ..
+RUN cd /workspace
 
 # Create a new directory for the build
 RUN mkdir build

@@ -1,14 +1,14 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "name": "Pico",
             "includePath": [
-                "${workspaceFolder}/src/**"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/arm-none-eabi-g++",
             "cStandard": "c17",
-            "cppStandard": "gnu++14",
+            "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-arm64",
             "configurationProvider": "ms-vscode.cmake-tools"
         }
